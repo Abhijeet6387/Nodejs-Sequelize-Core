@@ -1,0 +1,87 @@
+Node.js - 
+-> Node.js is an open-source server javascript runtime environment and uses asynchronous programming.
+-> Node.js eliminates the waiting and simply continuous with the next request.
+-> Node.js runs single-threaded, non-blocking, asynchronous programming which is very memory efficient.
+
+What can it do?
+-> Used for server-side programming, and primarily deployed for non-blocking, event-driven servers, such as traditional web sites and back-end API services.
+-> Can generate dynamic page content.
+-> Can create, open, read, write, delete and close files on the server.
+-> Can collect form data. Can add, delete, modify data in the database.
+
+API - 
+-> Api stands for Application Programming Interface. Consists of various communication protocols and subroutines that can be used by programs for inter-communication.
+-> There are various types of APIs available such as Web APIs, Local APIs, Program APIs etc.
+
+Sequelize -
+-> Sequelize is a promise based node.js ORM tool. 
+-> ORM is a technique to access a relational database from an object-oriented language.
+-> A Tool that helps to map software to database tables.
+
+Models - 
+-> Models are the essence of Sequelize. A model is an abstraction that represents a table in your database. In Sequelize, its a class that extends Model/
+-> The model tells Sequelize several things about the entity it represents, such as the name of the table in the database and which columns it has(and their data types)
+
+Model Querying (Finders) - 
+-> Finder methods are the ones that generate SELECT queries.
+-> findAll(), findByPk(), findOne(), findOrCreate(), findAndCountAll()
+-> The findAndCountAll method is a convenience method that combines findAll and count. 
+-> When group is not provided, the findAndCountAll method returns an object with two properties:
+        count - an integer - the total number records matching the query
+        rows - an array of objects - the obtained records
+-> When group is provided, the findAndCountAll method returns an object with two properties:
+        count - an array of objects - contains the count in each group and the projected attributes
+        rows - an array of objects - the obtained records
+
+Getter, Setter and Virtual - 
+-> Sequelize allows you to define custom getters and setters for the attributes of your models.
+-> Virtual fields are fields that Sequelize populates under the hood, but in reality they don't even exist in the database.
+-> The VIRTUAL field does not cause a column in the table to exist. In other words, the model above will not have a fullName column. However, it will appear to have it!
+
+Validation and Constraints -
+-> Validations are checks performed in the Sequelize level, in pure JavaScript.
+-> If a validation fails, no SQL query will be sent to the database at all.
+-> Constraints are rules defined at SQL level (eg. Unique)
+-> If a constraint check fails, an error will be thrown by the database and Sequelize will forward this error to JavaScript
+-> Unlike in validation, SQL query is performed in constraint.
+
+Raw Queries - 
+-> As there are often use cases in which it is just easier to execute raw / already prepared SQL queries, you can use the sequelize.query method.
+-> Replacements in a query can be done in two different ways, either using named parameters (starting with :), or unnamed, represented by a ?. 
+-> Replacements are passed in the options object.
+-> If an array is passed, ? will be replaced in the order that they appear in the array
+-> If an object is passed, :key will be replaced with the keys from that object. If the object contains keys not found in the query or vice versa, an exception will be thrown.
+-> Bind parameters are like replacements. Except replacements are escaped and inserted into the query by sequelize before the query is sent to the database, while bind parameters are sent to the database outside the SQL query text.
+
+Associations - 
+-> Sequelize supports the standard associations: One-To-One, One-To-Many and Many-To-Many.
+-> To do this, Sequelize provides four types of associations that should be combined to create them:
+    -> HasOne association
+    -> BelongsTo association    
+    -> HasMany association
+    -> BelongsToMany association
+-> To create a One-To-One relationship, the hasOne and belongsTo associations are used together;
+-> To create a One-To-Many relationship, the hasMany and belongsTo associations are used together;
+-> To create a One-To-Many relationship, the hasMany and belongsTo associations are used together;
+
+Many-To-Many -
+-> Many-To-Many associations connect one source with multiple targets, while all these targets can in turn be connected to other sources beyond the first.
+-> This cannot be represented by adding one foreign key to one of the tables, like the other relationships did. 
+-> Instead, the concept of a Junction Model is used. This will be an extra model (and extra table in the database) which will have two foreign key columns and will keep track of the associations. 
+-> The junction table is also sometimes called join table or through table.
+
+Paranoid - 
+-> A paranoid table is one that, when told to delete a record, it will not truly delete it. 
+-> Instead, a special column called deletedAt will have its value set to the timestamp of that deletion request.
+-> Paranoid tables perform a soft-deletion of records, instead of a hard-deletion.
+-> For hard delete, need to give a property "force: true" to destroy().
+-> To restore soft-deleted records, restore() method can be used.
+-> To fetch all the data (even the soft deleted ones) from a table pass "paranoid: false" to any find method.
+
+Eager Loading V/s Lazy Loading - 
+-> Eager Loading refers to the techNique of fetching everything at once, since the beginning with a larger query.
+-> Lazy Loading on the other hand, refers to the technique of fetching associated data when you really want it.
+-> Eager Loading is the act of querying data of several models at once (one 'main' model and one or more associated models). 
+-> At the SQL level, this is a query with one or more joins. 
+-> In Sequelize, eager loading is mainly done by using the include option on a model finder query (such as findOne, findAll, etc)
+
